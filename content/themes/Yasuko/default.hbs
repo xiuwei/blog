@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{! Document Settings }}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    {{! Page Meta }}
+    <title>{{meta_title}}</title>
+    <link rel="shortcut icon" href="{{asset "images/favicon.png"}}">
+    <link href="{{asset "images/apple-touch-icon.png"}}" rel="apple-touch-icon" />
+    <link href="{{asset "images/apple-touch-icon-76x76.png"}}" rel="apple-touch-icon" sizes="76x76" />
+    <link href="{{asset "images/apple-touch-icon-120x120.png"}}" rel="apple-touch-icon" sizes="120x120" />
+    <link href="{{asset "images/apple-touch-icon-152x152.png"}}" rel="apple-touch-icon" sizes="152x152" />
+    <meta name="description" content="{{meta_description}}" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+    <link rel="author" href="https://plus.google.com/105790146178074084423/">
+    {{! Styles'n'Scripts }}
+    <link rel="stylesheet" type="text/css" href="{{asset "css/all.min.css"}}" />
+    {{! Ghost outputs important style and meta data with this tag }}
+    {{ghost_head}}
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?70ca6c652ea6eaa4e24bdf61aeb6501e";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</head>
+<body class="{{body_class}} nav-closed">
+{{! Everything else gets inserted here }}
+{{{body}}}
+    <footer class="site-footer clearfix ">
+        <section class="copyright "><a href="{{@blog.url}} ">{{@blog.title}}</a> &copy; {{date format="YYYY "}}</section>
+        <section>
+        <a href="#">Github  </a> <a href="https://github.com/xiuwei" class="github-repo"><span class="gadget-github"></span>Star</a>  <a href="">维Ta命D</a>
+        </section>
+            <section class="poweredby ">Powered by  <a href="https://ghost.org ">Ghost</a></section>
+            <section><a href="http://www.miitbeian.gov.cn/">粤ICP备XXXX号</a></section>
+    </footer>
+    {{!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection --}}
+    <script type="text/javascript" src="https://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.3.min.js"></script>
+    {{! Ghost outputs important scripts and data with this tag }}
+    {{ghost_foot}}
+    <script type="text/javascript" src="{{asset "js/all.min.js"}}"></script>
+
+</body>
+</html>
