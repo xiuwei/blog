@@ -1,17 +1,13 @@
-var moment = require('moment'),
-    path = require('path');
+var moment  = require('moment'),
+    path    = require('path');
 
 function StorageBase() {
-    Object.defineProperty(this, 'requiredFns', {
-        value: ['exists', 'save', 'serve', 'delete'],
-        writable: false
-    });
 }
 
 StorageBase.prototype.getTargetDir = function (baseDir) {
-    var m = moment(),
+    var m = moment(new Date().getTime()),
         month = m.format('MM'),
-        year = m.format('YYYY');
+        year =  m.format('YYYY');
 
     if (baseDir) {
         return path.join(baseDir, year, month);
@@ -29,11 +25,7 @@ StorageBase.prototype.generateUnique = function (store, dir, name, ext, i) {
         append = '-' + i;
     }
 
-    if (ext) {
-        filename = path.join(dir, name + append + ext);
-    } else {
-        filename = path.join(dir, name + append);
-    }
+    filename = path.join(dir, name + append + ext);
 
     return store.exists(filename).then(function (exists) {
         if (exists) {
@@ -46,23 +38,11 @@ StorageBase.prototype.generateUnique = function (store, dir, name, ext, i) {
 };
 
 StorageBase.prototype.getUniqueFileName = function (store, image, targetDir) {
-    var ext = path.extname(image.name), name;
+    var ext = path.extname(image.name),
+        name = path.basename(image.name, ext).replace(/[\W]/gi, '-'),
+        self = this;
 
-    // poor extension validation
-    // .1 is not a valid extension
-    if (!ext.match(/.\d/)) {
-        name = this.getSanitizedFileName(path.basename(image.name, ext));
-        return this.generateUnique(store, targetDir, name, ext, 0);
-    } else {
-        name = this.getSanitizedFileName(path.basename(image.name));
-        return this.generateUnique(store, targetDir, name, null, 0);
-    }
-};
-
-StorageBase.prototype.getSanitizedFileName = function getSanitizedFileName(fileName) {
-    // below only matches ascii characters, @, and .
-    // unicode filenames like город.zip would therefore resolve to ----.zip
-    return fileName.replace(/[^\w@.]/gi, '-');
+    return self.generateUnique(store, targetDir, name, ext, 0);
 };
 
 module.exports = StorageBase;

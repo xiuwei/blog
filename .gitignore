@@ -67,3 +67,6 @@ npm-debug.log
 *.css.shim.ts
 *.ngsummary.json
 *.shim.ngstyle.ts
+
+#data#
+/content/data/**

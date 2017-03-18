@@ -12,13 +12,34 @@ config = {
     // Configure your URL and mail settings here
     production: {
         url: 'http://coderstalk.cn',
-        mail: {},
+        mail: {
+            from: 'xiuwei168@qq.com',
+            transport: 'SMTP',
+            host: 'smtp.qq.com',
+            options: {
+                port: 465,
+                service: 'QQ',
+                auth: {
+                    user: 'xiuwei168@qq.com',
+                    pass: 'gswfxejgifqicbci'
+                }
+            }
+        },
         database: {
             client: 'sqlite3',
             connection: {
                 filename: path.join(__dirname, '/content/data/ghost.db')
             },
             debug: false
+        },
+        // 七牛云存储
+        storage: { 
+            provider: 'qiniu',
+            bucketname: 'blog',//在七牛云创建的bucketname
+            ACCESS_KEY: '8BqaVpajNbZZVSyNvOCJAzk3IEk58Kpc23LHKKsi',//七牛云的ACCESS_KEY
+            SECRET_KEY: 'flFd-wShwauOvim-sKXli199ngjjZQq7akNqALmg',//七牛云的SECRET_KEY
+            root: '/blog/storage/',//自定义前缀，随便写也可以
+            prefix: 'https://ompxmtln6.qnssl.com'//七牛云的域名
         },
 
         server: {
@@ -32,7 +53,19 @@ config = {
         // The url to use when providing links to the site, E.g. in RSS and email.
         // Change this to your Ghost blog's published URL.
         url: 'http://localhost:2368',
-
+        mail: {
+            from: 'xiuwei168@qq.com',
+            transport: 'SMTP',
+            host: 'smtp.qq.com',
+            options: {
+                port: 465,
+                service: 'QQ',
+                auth: {
+                    user: 'xiuwei168@qq.com',
+                    pass: 'gswfxejgifqicbci'
+                }
+            }
+        },
         // Example refferer policy
         // Visit https://www.w3.org/TR/referrer-policy/ for instructions
         // default 'origin-when-cross-origin',
@@ -61,6 +94,15 @@ config = {
                 filename: path.join(__dirname, '/content/data/ghost-dev.db')
             },
             debug: false
+        },
+        // 七牛云存储
+        storage: { 
+            provider: 'qiniu',
+            bucketname: 'blog',//在七牛云创建的bucketname
+            ACCESS_KEY: '8BqaVpajNbZZVSyNvOCJAzk3IEk58Kpc23LHKKsi',//七牛云的ACCESS_KEY
+            SECRET_KEY: 'flFd-wShwauOvim-sKXli199ngjjZQq7akNqALmg',//七牛云的SECRET_KEY
+            root: '/blog/storage/',//自定义前缀，随便写也可以
+            prefix: 'https://ompxmtln6.qnssl.com'//七牛云的域名
         },
         // #### Server
         // Can be host & port (default), or socket
